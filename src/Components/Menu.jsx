@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import * as API from "../Services/spaceApi";
 
-import { SiSpacex } from "react-icons/si";
 import { GiRocketFlight , GiMissileLauncher } from "react-icons/gi";
 import { TbSatellite } from "react-icons/tb";
 
-import { Heading } from "@chakra-ui/react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel , Wrap , WrapItem , Center , Box , Flex , Text , Highlight , Spacer , Tag} from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 
-
+import "../Assets/style.css"
 import {LaunchItems , RocketItems , StarlinkItems} from "./Items"
 
 function Menu(){
@@ -29,20 +27,6 @@ function Menu(){
 
   return (
     <>
-
-      <Wrap spacing='-60px' justify='center'>
-        <WrapItem>
-        <Center w='180px' h='90px'>
-        <Heading as='h1' size="2xl" align="center" noOfLines={1}> Space </Heading>
-        </Center>
-        </WrapItem>
-        <WrapItem>
-        <Center w='180px' h='92px'>
-        <SiSpacex size={95}/>
-        </Center>
-        </WrapItem>
-      </Wrap>
-
       <Tabs isFitted variant="enclosed" colorScheme="teal">
         <TabList mb="1em" m={[2,3]}>
           <Tab><GiRocketFlight style={{ marginRight: 5 }}/>Launches</Tab>

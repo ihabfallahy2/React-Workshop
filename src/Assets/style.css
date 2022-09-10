@@ -1,3 +1,4 @@
-body{
-    background: url(dark-space-stars-night-black-video-games-2135131-wallhere.com.jpg);
+.load{
+    background-image: linear-gradient(to bottom, #051937, #004d7a, #008793, #00bf72, #a8eb12);
+    /* background-image: url("./space.jpg"); */
 }
