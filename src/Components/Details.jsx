@@ -10,8 +10,8 @@ import {
     AccordionPanel,
     AccordionIcon,
 } from '@chakra-ui/react'
-import { extendTheme } from '@chakra-ui/react'
-import { Show, Hide , Spacer} from '@chakra-ui/react'
+import { Show, Hide, Spacer } from '@chakra-ui/react'
+import { Center } from '@chakra-ui/react'
 
 
 export function LaunchDetails() {
@@ -28,44 +28,41 @@ export function LaunchDetails() {
 
     console.log(launch)
 
-    const property = {
-        imageUrl: 'https://bit.ly/2Z4KKcF',
-        imageAlt: 'Rear view of modern home with pool',
-        beds: 3,
-        baths: 2,
-        title: 'Modern home in city center in the heart of historic Los Angeles',
-        formattedPrice: '$1,900.00',
-        reviewCount: 34,
-        rating: 4,
-      }
-      
     return (
         <>
-            <Box bg="gray.100" p={4} m={4} borderRadius="lg" display="flex" direction={{ sm: 'column', md: 'row' }}>
-                <Image width={{ sm:'100%', md: '25%', lg: '25%', xl: '15%'}} src={image.small} borderRadius='md' bg="teal.100" m={6} align="center"/>
-                <Spacer />
-                <Hide below='md'>
-                    <Box m={8}  maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+            <Box bg="gray.100" p={4} m={4} borderRadius="lg" display="flex" align="center" justify="center">
+
+                <Hide above="sm">
+
+                <Center>
+                    <Box maxW='lg' borderRadius='lg' >
+                        <Image boxSize='100px' src={image.small} borderRadius='md' bg="teal.100" m={6} align="center" />
+
                         <Heading size="4xl">{launch.name}</Heading>
+
                         <HStack spacing={4} mt={8}>
                             <Tag size='lg' colorScheme='teal'>
                                 {launch.details}
                             </Tag>
                         </HStack>
                     </Box>
+                </Center>
                 </Hide>
-            </Box>
-            <Show below='md'>
+                <Show above='sm'>
+                    
+                    <Image boxSize='200px' src={image.small} borderRadius='md' bg="teal.100" m={6} align="center" />
 
-                <Box bg="gray.100" p={4} m={4} borderRadius="lg" align="center">
+                    <Box mt={10}>
+
                     <Heading size="4xl">{launch.name}</Heading>
                     <HStack spacing={4} mt={8}>
                         <Tag size='lg' colorScheme='teal'>
                             {launch.details}
                         </Tag>
                     </HStack>
-                </Box>
-            </Show>
+                    </Box>
+                </Show>
+            </Box>
             <Accordion bg="gray.100" p={4} m={4} borderRadius="lg" defaultIndex={[1]} allowMultiple>
                 <AccordionItem >
                     <h2>

@@ -1,10 +1,13 @@
+import { useState, useEffect } from "react";
+
 import { FaCalendarCheck } from "react-icons/fa";
 import { BsFillNodePlusFill } from "react-icons/bs";
 import { Icon } from '@chakra-ui/icons'
 import { Link } from "react-router-dom";
 
-import { Box, Flex, Text, Highlight, Spacer, Tag, Button } from "@chakra-ui/react";
+import { Box, Flex, Text, Highlight, Spacer, Tag, Button, WrapItem, Image, Badge } from "@chakra-ui/react";
 import { Show, Hide } from '@chakra-ui/react'
+import { StarIcon } from '@chakra-ui/icons'
 
 import { format } from 'date-fns'
 import { es } from "date-fns/locale";
@@ -19,7 +22,7 @@ export function LaunchItems(GetLaunch) {
         <Spacer />
 
         <Show breakpoint='(min-width: 500px)'>
-        <Tag p={2} bg={GetLaunch.success ? "red.100" : "green.100"} >{GetLaunch.success ? "Exitoso" : "Fracaso"}</Tag>
+          <Tag p={2} bg={GetLaunch.success ? "green.100" : "red.100"} >{GetLaunch.success ? "Exitoso" : "Fracaso"}</Tag>
         </Show>
       </Flex>
 
@@ -38,18 +41,49 @@ export function LaunchItems(GetLaunch) {
   )
 }
 
-export function RocketItems(GetRocket) {
-  return (
-    <Box key={GetRocket.id} bg="gray.100" p={4} m={4} borderRadius="lg">
-      {GetRocket.name}
-    </Box>
-  )
-}
+export function RocketItems(GetCrew) {
 
-export function StarlinkItems(GetStarlink) {
+  const handleImgError = e => {
+    e.target.src = "https://bit.ly/2Z4KKcF"
+  }
   return (
-    <Box key={GetStarlink.id} bg="gray.100" p={4} m={4} borderRadius="lg">
-      id : {GetStarlink.id} - Starlink Version - {GetStarlink.version}
-    </Box>
-  );
+    <WrapItem>
+      <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
+      <Link to={"LaunchDetails/" + GetCrew.launches}>
+        <Image src={GetCrew.image} onError={handleImgError} referrerPolicy="no-referrer" boxSize='300px'/>
+        </Link>
+        <Box p='6'>
+          <Box display='flex' alignItems='baseline'>
+            <Badge borderRadius='full' px='2' colorScheme='teal'>
+              status
+            </Badge>
+            <Box
+              color='gray.500'
+              fontWeight='semibold'
+              letterSpacing='wide'
+              fontSize='xs'
+              textTransform='uppercase'
+              ml='2'
+            >
+              {GetCrew.status}
+            </Box>
+          </Box>
+
+          <Box
+            mt='1'
+            fontWeight='semibold'
+            as='h4'
+            lineHeight='tight'
+            noOfLines={1}
+          >
+            {GetCrew.name}
+          </Box>
+
+          <Box>
+            Agency &bull; {GetCrew.agency}
+          </Box>
+        </Box>
+      </Box>
+    </WrapItem>
+  )
 }

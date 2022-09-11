@@ -40,3 +40,14 @@ export async function GetAllStarlinks(){
         console.log(error);
     }
 }
+
+
+export async function GetAllCrews(){
+    try {
+        const response = await fetch(API_URL + "crew");
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+}

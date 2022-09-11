@@ -1,47 +1,45 @@
 import { useState, useEffect } from "react";
 import * as API from "../Services/spaceApi";
 
-import { GiRocketFlight , GiMissileLauncher } from "react-icons/gi";
+import { GiRocketFlight, GiMissileLauncher } from "react-icons/gi";
 import { TbSatellite } from "react-icons/tb";
 
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Flex, Wrap } from "@chakra-ui/react";
 
 import "../Assets/style.css"
-import {LaunchItems , RocketItems , StarlinkItems} from "./Items"
+import { LaunchItems, RocketItems } from "./Items"
 
-function Menu(){
-    // Launches
+function Menu() {
+  // Launches
   const [launches, setLaunches] = useState([]);
 
-  useEffect(() => {API.GetAllLaunches().then((data) => setLaunches(data))}, []);
+  useEffect(() => { API.GetAllLaunches().then((data) => setLaunches(data)) }, []);
 
   // Rockets
-  const [rockets, setRockets] = useState([]);
+  const [crews, setCrews] = useState([]);
 
-  useEffect(() => {API.GetAllRockets().then((data) => setRockets(data))}, []);
+  useEffect(() => { API.GetAllCrews().then((data) => setCrews(data)) }, []);
+  
+  //crew image
+  const [crewImage, setCrewImages] = useState([]);
 
-  // Starlink
-  const [starlink, setStarlink] = useState([]);
-
-  useEffect(() => {API.GetAllStarlinks().then((data) => setStarlink(data))}, []);
+  useEffect(() => { API.GetAllCrews().then((data) => setCrewImages(data.image)) }, []);
 
   return (
     <>
       <Tabs isFitted variant="enclosed" colorScheme="teal">
-        <TabList mb="1em" m={[2,3]}>
-          <Tab><GiRocketFlight style={{ marginRight: 5 }}/>Launches</Tab>
-          <Tab><GiMissileLauncher style={{ marginRight: 5  }}/>Rockets</Tab>
-          <Tab><TbSatellite style={{ marginRight: 5  }}/>Starlink</Tab>
+        <TabList mb="1em" m={[2, 3]}>
+          <Tab><GiRocketFlight style={{ marginRight: 5 }} />Launches</Tab>
+          <Tab><GiMissileLauncher style={{ marginRight: 5 }} />Crew</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
-          {launches.map((GetLaunch) => (<LaunchItems key={GetLaunch.id} {...GetLaunch}/>))}
+            {launches.map((GetLaunch) => (<LaunchItems key={GetLaunch.id} {...GetLaunch} />))}
           </TabPanel>
           <TabPanel>
-          {rockets.map((GetRocket) => (<RocketItems key={GetRocket.id} {...GetRocket}/>))}
-          </TabPanel>
-          <TabPanel>
-          {starlink.map((GetStarlink) => (<StarlinkItems key={GetStarlink.id} {...GetStarlink}/>))}
+            <Wrap spacing='80px' display="flex" alignItems="center" justify="center">
+              {crews.map((GetCrew) => (<RocketItems key={GetCrew.id} {...GetCrew} />))}
+            </Wrap>
           </TabPanel>
         </TabPanels>
       </Tabs>
